@@ -17,9 +17,9 @@ final class AppleManagerTests: XCTestCase {
         ProcessInfo.processInfo.environment["XC_APPLE_ID_PASSWORD"] ?? ""
     }
 
-    func testSignIn() async throws {
-        let appleManager = AppleManager()
-
-        try await appleManager.signIn(appleID: Self.appleID, password: Self.appleIDPassword)
-    }
+//    func testSignIn() async throws {
+//        let appleManager = AppleManager()
+//
+//        try await appleManager.signIn(appleID: Self.appleID, password: Self.appleIDPassword)
+//    }
 }

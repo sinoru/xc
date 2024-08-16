@@ -1,0 +1,46 @@
+name: Test
+
+on:
+  push:
+    paths:
+      - '.github/workflows/test.yml'
+      - '**/*.swift'
+  pull_request:
+    paths:
+      - '.github/workflows/test.yml'
+      - '**/*.swift'
+
+jobs:
+  swift-test:
+    strategy:
+      matrix:
+        operating-system: ['macos-12', 'macos-13', 'macos-14']
+        swift-version: ['5.9.2', '5.10.1']
+        experimental: [null]
+        include:
+          - operating-system: 'ubuntu-latest'
+            swift-version: '5.10.1'
+            experimental: 'experimental'
+    runs-on: ${{ matrix.operating-system }}
+    continue-on-error: ${{ matrix.experimental == 'experimental' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: swift-actions/setup-swift@v2
+        with:
+          swift-version: ${{ matrix.swift-version }}
+      - name: Package resolve
+        run: swift package resolve
+      - name: Build
+        run: |
+          if [ -z "$RUNNER_DEBUG" ]; then
+            swift build
+          else
+            swift build -v
+          fi
+      - name: Run tests
+        run: |
+          if [ -z "$RUNNER_DEBUG" ]; then
+            swift test
+          else
+            swift test -v
+          fi
