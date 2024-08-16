@@ -17,6 +17,24 @@
         "revision" : "cd142fd2f64be2100422d658e7411e39489da985",
         "version" : "1.2.0"
       }
+    },
+    {
+      "identity" : "swift-crypto",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-crypto.git",
+      "state" : {
+        "revision" : "a53a7e8f858902659d4784322bede34f4e49097e",
+        "version" : "3.6.1"
+      }
+    },
+    {
+      "identity" : "swift-json-value",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sinoru/swift-json-value",
+      "state" : {
+        "revision" : "eab90dfc8420b7506c3cd786e2deb300f79179eb",
+        "version" : "0.0.5"
+      }
     }
   ],
   "version" : 2

@@ -22,6 +22,13 @@ let package = Package(
         .package(
             url: "https://github.com/apple/swift-atomics",
             from: "1.2.0"),
+        .package(
+            url: "https://github.com/apple/swift-crypto.git",
+            "1.0.0" ..< "4.0.0"
+        ),
+        .package(
+            url: "https://github.com/sinoru/swift-json-value",
+            from: "0.0.5"),
     ],
     targets: [
         .executableTarget(
@@ -40,7 +47,16 @@ let package = Package(
                     name: "ArgumentParser",
                     package: "swift-argument-parser"),
             ]),
+        .target(
+            name: "XcApple",
+            dependencies: [
+                .product(name: "Crypto", package: "swift-crypto"),
+                .product(name: "JSONValue", package: "swift-json-value"),
+            ]),
         .target(name: "XcKit"),
+        .testTarget(
+            name: "XcAppleTests",
+            dependencies: ["XcApple"]),
         .testTarget(
             name: "XcKitTests",
             dependencies: ["XcKit"]),
