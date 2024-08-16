@@ -1,16 +1,16 @@
-// swift-tools-version:5.7
+// swift-tools-version: 5.8
 
 import PackageDescription
 
 let package = Package(
-    name: "Xc",
+    name: "xc",
     platforms: [
         .macOS(.v10_15),
     ],
     products: [
         .executable(
             name: "xc",
-            targets: ["XcCommand"]),
+            targets: ["xc"]),
         .library(
             name: "XcKit",
             type: .static,
@@ -19,14 +19,14 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/apple/swift-argument-parser",
-            .upToNextMajor(from: "1.2.2")),
+            from: "1.5.0"),
         .package(
             url: "https://github.com/apple/swift-atomics",
-            .upToNextMajor(from: "1.1.0")),
+            from: "1.2.0"),
     ],
     targets: [
         .executableTarget(
-            name: "XcCommand",
+            name: "xc",
             dependencies: [
                 .product(
                     name: "ArgumentParser",
@@ -40,8 +40,5 @@ let package = Package(
         .testTarget(
             name: "XcKitTests",
             dependencies: ["XcKit"]),
-    ],
-    swiftLanguageVersions: [
-        .v5,
     ]
 )
