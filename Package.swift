@@ -1,4 +1,4 @@
-// swift-tools-version: 5.8
+// swift-tools-version: 5.9
 
 import PackageDescription
 
@@ -13,7 +13,6 @@ let package = Package(
             targets: ["xc"]),
         .library(
             name: "XcKit",
-            type: .static,
             targets: ["XcKit"]),
     ],
     dependencies: [
@@ -29,12 +28,17 @@ let package = Package(
             name: "xc",
             dependencies: [
                 .product(
-                    name: "ArgumentParser",
-                    package: "swift-argument-parser"),
-                .product(
                     name: "Atomics",
                     package: "swift-atomics"),
                 .target(name: "XcKit"),
+                .target(name: "XcArgument"),
+            ]),
+        .target(
+            name: "XcArgument",
+            dependencies: [
+                .product(
+                    name: "ArgumentParser",
+                    package: "swift-argument-parser"),
             ]),
         .target(name: "XcKit"),
         .testTarget(

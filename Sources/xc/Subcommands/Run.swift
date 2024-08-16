@@ -4,6 +4,7 @@ import Atomics
 import Darwin.POSIX.sys.types
 import Darwin.POSIX.unistd
 import Foundation
+import XcArgument
 import XcKit
 
 extension XcCommand {

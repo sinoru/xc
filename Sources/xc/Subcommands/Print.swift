@@ -1,4 +1,5 @@
 import ArgumentParser
+import XcArgument
 import XcKit
 
 extension XcCommand {

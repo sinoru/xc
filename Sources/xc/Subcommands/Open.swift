@@ -2,6 +2,7 @@ import AppKit
 import ArgumentParser
 import Dispatch
 import Foundation
+import XcArgument
 import XcKit
 
 extension XcCommand {

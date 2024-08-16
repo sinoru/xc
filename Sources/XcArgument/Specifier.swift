@@ -1,7 +1,7 @@
 import Foundation
 import XcKit
 
-enum Specifier {
+package enum Specifier {
 
     case `nil`
     case build(Xcode.Build)
@@ -9,7 +9,7 @@ enum Specifier {
     case operatorAndBuild(Operator, Xcode.Build)
     case operatorAndVersion(Operator, Xcode.Version)
 
-    init(expressionString string: String) throws {
+    package init(expressionString string: String) throws {
         var string = string.trimmingCharacters(in: .whitespaces)
         var `operator`: Operator?
         for _operator in Operator.allCases.sorted().reversed() {
@@ -48,12 +48,12 @@ enum Specifier {
 
 extension Specifier {
 
-    enum Error: Swift.Error {
+    package enum Error: Swift.Error {
 
         case cannotParse(String)
     }
 
-    enum Operator: String, CaseIterable {
+    package enum Operator: String, CaseIterable {
 
         case equalTo = "=="
         case greaterThanOrEqualTo = ">="
@@ -68,25 +68,25 @@ extension Specifier.Operator: Comparable, Equatable {
 
     // MARK: Comparable
 
-    static func <(lhs: Self, rhs: Self) -> Bool {
+    package static func <(lhs: Self, rhs: Self) -> Bool {
         lhs.rawValue.count < rhs.rawValue.count ? true : lhs.rawValue < rhs.rawValue
     }
 
-    static func <=(lhs: Self, rhs: Self) -> Bool {
+    package static func <=(lhs: Self, rhs: Self) -> Bool {
         lhs.rawValue.count <= rhs.rawValue.count ? true : lhs.rawValue <= rhs.rawValue
     }
 
-    static func >(lhs: Self, rhs: Self) -> Bool {
+    package static func >(lhs: Self, rhs: Self) -> Bool {
         lhs.rawValue.count > rhs.rawValue.count ? true : lhs.rawValue > rhs.rawValue
     }
 
-    static func >=(lhs: Self, rhs: Self) -> Bool {
+    package static func >=(lhs: Self, rhs: Self) -> Bool {
         lhs.rawValue.count >= rhs.rawValue.count ? true : lhs.rawValue >= rhs.rawValue
     }
 
     // MARK: Equatable
 
-    static func ==(lhs: Self, rhs: Self) -> Bool {
+    package static func ==(lhs: Self, rhs: Self) -> Bool {
         lhs.rawValue == rhs.rawValue
     }
 }
@@ -94,7 +94,7 @@ extension Specifier.Operator: Comparable, Equatable {
 extension Sequence
 where Element == Xcode {
 
-    func filter(specifier: Specifier) -> [Xcode] {
+    package func filter(specifier: Specifier) -> [Xcode] {
         switch specifier {
         case .nil:
             return .init(self)
@@ -139,7 +139,7 @@ where Element == Xcode {
         }
     }
 
-    func sorted(specifier: Specifier) -> [Xcode] {
+    package func sorted(specifier: Specifier) -> [Xcode] {
         switch specifier {
         case .nil, .version(_), .operatorAndVersion(_, _):
             return sorted(by: _defaultSortingPredicate)
@@ -154,7 +154,7 @@ where Self: RandomAccessCollection,
       Element == Xcode
 {
 
-    mutating func sort(specifier: Specifier) {
+    package mutating func sort(specifier: Specifier) {
         switch specifier {
         case .nil, .version(_), .operatorAndVersion(_, _):
             sort(by: _defaultSortingPredicate)

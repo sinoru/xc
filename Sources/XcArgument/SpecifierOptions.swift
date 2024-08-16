@@ -1,6 +1,6 @@
 import ArgumentParser
 
-struct SpecifierOptions: ParsableArguments {
+package struct SpecifierOptions: ParsableArguments {
 
     @Option(
         name: [.customShort("s"), .customLong("specify")],
@@ -15,9 +15,11 @@ struct SpecifierOptions: ParsableArguments {
                         """,
             valueName: "specifier"),
         transform: Specifier.init(expressionString:))
-    private var _specifier: Specifier?
+    private var _specifier: Specifier? = nil
 
-    var specifier: Specifier {
+    package init() { }
+
+    package var specifier: Specifier {
         get {
             _specifier ?? .nil
         }
